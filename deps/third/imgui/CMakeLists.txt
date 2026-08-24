@@ -10,6 +10,22 @@ FetchContent_GetProperties(ImGui SOURCE_DIR ImGui_FETCHED_SOURCE)
 FetchContent_Populate(ImGuiTextEdit)
 FetchContent_GetProperties(ImGuiTextEdit SOURCE_DIR ImGuiTextEdit_FETCHED_SOURCE)
 
+set(_imgui_text_editor_cpp "${ImGuiTextEdit_FETCHED_SOURCE}/TextEditor.cpp")
+if(EXISTS "${_imgui_text_editor_cpp}")
+    file(READ "${_imgui_text_editor_cpp}" _imgui_text_editor_cpp_contents)
+    string(REPLACE "#include \"imgui.h\" // for imGui::GetCurrentWindow()"
+                   "#include \"imgui.h\" // for imGui::GetCurrentWindow()\n#include \"imgui_internal.h\""
+                   _imgui_text_editor_cpp_contents
+                   "${_imgui_text_editor_cpp_contents}")
+    string(REPLACE "ImGui::PushTabStop(true);" "ImGui::PushItemFlag(ImGuiItemFlags_NoTabStop, false);"
+                   _imgui_text_editor_cpp_contents
+                   "${_imgui_text_editor_cpp_contents}")
+    string(REPLACE "ImGui::PopTabStop();" "ImGui::PopItemFlag();"
+                   _imgui_text_editor_cpp_contents
+                   "${_imgui_text_editor_cpp_contents}")
+    file(WRITE "${_imgui_text_editor_cpp}" "${_imgui_text_editor_cpp_contents}")
+endif()
+
 FetchContent_Populate(IconFontCppHeaders)
 FetchContent_GetProperties(IconFontCppHeaders SOURCE_DIR IconFontCppHeaders_FETCHED_SOURCE)
 
