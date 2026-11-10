@@ -61,9 +61,9 @@ If you are planning on doing mod development using UE4SS, you can do the same as
 
 1. Clone the repo.
 2. Execute this command: `git submodule update --init --recursive`
-    Make sure your Github account is linked to your Epic Games account for UE source access.
+    The Unreal submodule requires the applicable Epic Games source license and
+    an authenticated GitHub account with access to the configured source repository.
     Do not use the `--remote` option because that will force third-party dependencies to update to the latest commit, and that can break things.
-    You will need your github account to be linked to an Epic games account to pull the Unreal pseudo code submodule.
 3. There are three different ways you can build UE4SS.
     1. Execute this command: `build_auto.bat <BuildMode> <Target>`, example: `build_auto.bat Release ue4ss`
         Valid build modes are `Release` and `Debug`, and valid targets are `ue4ss` and `xinput1_3`.
