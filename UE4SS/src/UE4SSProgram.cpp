@@ -262,11 +262,11 @@ namespace RC
 
             Unreal::UnrealInitializer::SetupUnrealModules();
 
+            setup_mod_directory_path();
+
             setup_mods();
             install_cpp_mods();
             start_cpp_mods();
-
-            setup_mod_directory_path();
 
             if (m_has_game_specific_config)
             {
